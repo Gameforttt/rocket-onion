@@ -10,7 +10,7 @@
             --bg: #0a0a0a;
             --panel: #111111;
             --accent: #00ffff;
-            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.6);
+            --accent-glow: 0 0 30px rgba(0, 255, 255, 0.8);
             --text: #ffffff;
             --text-secondary: #aaaaaa;
             --border: #333333;
@@ -25,11 +25,55 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+        }
+        /* Вступительная анимация */
+        .intro-animation {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeOut 0.8s ease forwards 3s;
+        }
+        .intro-logo {
+            font-size: 6rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff3366, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--accent-glow);
+            opacity: 0;
+            animation: logoAppear 1.5s ease forwards 0.5s, glowPulse 2s infinite alternate 2s;
+        }
+        .intro-rocket {
+            font-size: 8rem;
+            animation: rocketFly 2s ease forwards 1s;
+        }
+        @keyframes logoAppear {
+            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes rocketFly {
+            0% { transform: translateY(100px) rotate(-30deg); opacity: 0; }
+            100% { transform: translateY(-20px) rotate(-10deg); opacity: 1; }
+        }
+        @keyframes glowPulse {
+            from { text-shadow: 0 0 20px rgba(0,255,255,0.6); }
+            to { text-shadow: 0 0 50px rgba(0,255,255,1); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
         }
         header {
             text-align: center;
             padding: 40px 20px;
             width: 100%;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 3.5s;
         }
         .logo {
             font-size: 4rem;
@@ -59,6 +103,8 @@
             padding: 0 20px;
             flex-wrap: wrap;
             justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 4s;
         }
         .nav-btn {
             padding: 14px 32px;
@@ -86,6 +132,11 @@
             max-width: 1300px;
             padding: 20px;
             flex: 1;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards 4.5s;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
         .page {
             display: none;
@@ -229,10 +280,18 @@
             text-align: center;
             color: #555;
             font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 5s;
         }
     </style>
 </head>
 <body>
+    <!-- Вступительная анимация -->
+    <div class="intro-animation">
+        <i class="fas fa-rocket intro-rocket" style="color:#ff3366;"></i>
+        <div class="intro-logo">ROCKET ONION</div>
+    </div>
+
     <header>
         <div class="logo">
             <i class="fas fa-rocket rocket" style="margin-right:15px;"></i> ROCKET ONION
@@ -381,3 +440,6 @@
     </script>
 </body>
 </html>
+</body>
+</html>
+
